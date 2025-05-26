@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government College of Engineering Kalahandi - Central Library</title>
+    <style>
+        :root {
+            --primary: #1a5276; /* Changed to a more professional dark blue */
+            --primary-dark: #0e3958;
+            --secondary: #2c3e50;
+            --accent: #f39c12; /* Changed to gold accent */
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --success: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 100;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0.5rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.3rem;
+            position: relative;
+        }
+        
+        .logo-icon {
+            height: 50px;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            padding: 2px;
+        }
+        
+        .logo:hover .logo-icon {
+            transform: rotate(5deg);
+        }
+        
+        .logo-text {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            line-height: 1.2;
+            font-family: 'Georgia', serif; /* More professional font */
+            letter-spacing: 0.5px;
+        }
+
+        .library-title {
+            font-family: 'Georgia', serif;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+        
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .logo:hover .logo-text::after {
+            width: 100%;
+        }
+        
+        .user-controls {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .user-controls a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .user-controls a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .user-controls a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .user-controls a:hover::before {
+            left: 0;
+        }
+        
+        .user-controls a i {
+            color: var(--accent);
+        }
+        
+        /* Navigation - Redesigned to be more attractive */
+        nav {
+            background-color: rgba(0,0,0,0.15);
+            backdrop-filter: blur(5px);
+            padding: 0;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0;
+            justify-content: center;
+            max-height: none;
+            transition: max-height 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                max-height: 0;
+                overflow: hidden;
+            }
+            
+            nav ul.open {
+                max-height: 300px;
+            }
+        }
+        
+        nav li {
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            position: relative;
+            display: block;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+        
+        nav li::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        nav li:hover::after {
+            width: 80%;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+        /* Mobile menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section - Search removed */
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 8rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 82, 118, 0.3); /* Updated to match new primary color */
+            z-index: 1;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: white;
+            clip-path: ellipse(50% 60% at 50% 100%);
+            z-index: 2;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+            font-family: 'Georgia', serif; /* More professional font */
+        }
+        
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 1.5rem auto 2.5rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            font-weight: 300;
+        }
+        
+        /* Principal Section */
+        .principal-section {
+            padding: 3rem 0;
+            background-color: white;
+        }
+
+        .principal-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .principal-image {
+            flex: 0 0 250px;
+            height: 280px;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-image: url('/api/placeholder/250/280');
+            background-size: cover;
+            background-position: center;
+            border: 3px solid var(--primary);
+        }
+
+        .principal-info {
+            flex: 1;
+        }
+
+        .principal-info h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .principal-info h3 {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .principal-info p {
+            margin-bottom: 1rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--accent);
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            padding: 3rem 0;
+            background-color: #f0f4f8;
+        }
+        
+        .quick-links h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-family: 'Georgia', serif;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .link-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .link-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .link-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        /* News and Events */
+        .news-events {
+            padding: 3rem 0;
+            background-color: white;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .section-header h2 {
+            color: var(--primary);
+            font-family: 'Georgia', serif;
+        }
+        
+        .view-all {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .view-all:hover {
+            color: var(--accent);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .news-card {
+            background: var(--light);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .news-image {
+            height: 180px;
+            background-color: #e2e8f0;
+            background-image: url('/api/placeholder/300/180');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        .news-date {
+            color: #718096;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-dark);
+        }
+        
+        .news-card p {
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        
+        /* Hours and Location */
+        .hours-location {
+            padding: 3rem 0;
+            background-color: #f0f4f8;
+        }
+        
+        .hours-location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .hours, .location {
+            padding: 2rem;
+            border-radius: 8px;
+            background-color: var(--light);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .hours h3, .location h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-family: 'Georgia', serif;
+        }
+        
+        .hours-list {
+            list-style: none;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .day {
+            font-weight: 500;
+        }
+        
+        .map-placeholder {
+            height: 200px;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            background-image: url('/api/placeholder/300/200');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #a0aec0;
+            font-size: 0.875rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .user-controls {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                z-index: 1000;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                transition: all 0.3s ease;
+                padding: 0.5rem 0;
+            }
+            
+            nav li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav a {
+                display: block;
+                padding: 0.8rem 0;
+            }
+            
+            .hero {
+                padding: 4rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .principal-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .principal-image {
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+    <!-- Using Font Awesome CDN for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Added Google Fonts for better typography -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo">
+                    <img src="/api/placeholder/50/50" alt="GCEK Logo" class="logo-icon">
+                    <div>
+                        <div class="logo-text">
+                            GOVERNMENT COLLEGE OF<br>ENGINEERING KALAHANDI
+                        </div>
+                        <div class="library-title">Central Library</div>
+                    </div>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="user-controls">
+                    <a href="#"><i class="fas fa-user"></i> Student Login</a>
+                    <a href="#"><i class="fas fa-user-tie"></i> Faculty Login</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Academics</a></li>
+                    <li><a href="#">Departments</a></li>
+                    <li><a href="#">Research</a></li>
+                    <li><a href="#">Admissions</a></li>
+                    <li><a href="#">Campus Life</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section - Search removed -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Excellence in Engineering Education</h1>
+                <p>Empowering future engineers with knowledge, skills, and values to transform society</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principal's Message Section -->
+    <section class="principal-section">
+        <div class="container">
+            <div class="principal-container">
+                <div class="principal-image"></div>
+                <div class="principal-info">
+                    <h2>From the Principal's Desk</h2>
+                    <h3>Prof. Dr. Rajesh Kumar Panda</h3>
+                    <p>Welcome to Government College of Engineering Kalahandi, a premier institution dedicated to engineering excellence and innovation. Established with a vision to provide quality technical education, our college has emerged as a center of academic excellence in the region.</p>
+                    <p>At GCEK, we strive to create a dynamic learning environment that fosters critical thinking, problem-solving abilities, and technical skills among our students. Our dedicated faculty members are committed to providing mentorship and guidance to help students achieve their full potential.</p>
+                    <a href="#" class="read-more">Read Full Message <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links">
+        <div class="container">
+            <h2>Quick Access</h2>
+            <div class="links-grid">
+                <div class="link-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Academic Programs</h3>
+                    <p>Explore our undergraduate and postgraduate engineering programs</p>
+                </div>
+                <div class="link-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>Research Labs</h3>
+                    <p>State-of-the-art laboratories for research and experimentation</p>
+                </div>
+                <div class="link-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Student Life</h3>
+                    <p>Campus activities, clubs, and student organizations</p>
+                </div>
+                <div class="link-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Placements</h3>
+                    <p>Career opportunities, training, and placement services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News and Events -->
+    <section class="news-events">
+        <div class="container">
+            <div class="section-header">
+                <h2>News & Events</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image"></div>
+                    <div class="news-content">
+                        <div class="news-date">May 18, 2025</div>
+                        <h3>National Technical Symposium</h3>
+                        <p>GCEK is hosting a National Technical Symposium featuring innovative projects and research presentations.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image"></div>
+                    <div class="news-content">
+                        <div class="news-date">May 15, 2025</div>
+                        <h3>Industry-Academia Partnership</h3>
+                        <p>MoU signed with leading tech companies to enhance practical training and internship opportunities.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image"></div>
+                    <div class="news-content">
+                        <div class="news-date">May 10, 2025</div>
+                        <h3>Research Paper Publication</h3>
+                        <p>GCEK researchers publish groundbreaking paper in international journal of engineering and technology.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours and Location -->
+    <section class="hours-location">
+        <div class="container">
+            <div class="hours-location-grid">
+                <div class="hours">
+                    <h3><i class="fas fa-clock"></i> College Hours</h3>
+                    <ul class="hours-list">
+                        <li><span class="day">Monday - Friday</span> <span>9:00 AM - 5:00 PM</span></li>
+                        <li><span class="day">Saturday</span> <span>9:00 AM - 1:00 PM</span></li>
+                        <li><span class="day">Administrative Office</span> <span>9:00 AM - 4:30 PM</span></li>
+                        <li><span class="day">Library</span> <span>8:30 AM - 8:00 PM</span></li>
+                    </ul>
+                    <div style="margin-top: 1rem;">
+                        <div style="display: inline-block; padding: 0.25rem 0.75rem; background-color: var(--success); color: white; border-radius: 1rem; font-size: 0.875rem; font-weight: 500;">
+                            <i class="fas fa-circle"></i> Open Now
+                        </div>
+                    </div>
+                </div>
+                <div class="location">
+                    <h3><i class="fas fa-map-marker-alt"></i> Location & Contact</h3>
+                    <div class="map-placeholder"></div>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map"></i> Bhawanipatna, Kalahandi, Odisha</li>
+                        <li><i class="fas fa-phone"></i> +91 XXXXX XXXXX</li>
+                        <li><i class="fas fa-envelope"></i> info@gcek.ac.in</li>
+                        <li><i class="fas fa-globe"></i> www.gcek.ac.in</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About GCEK</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Administration</a></li>
+                        <li><a href="#">Faculty</a></li>
+                        <li><a href="#">Infrastructure</a></li>
+                        <li><a href="#">Campus Tour</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Academics</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Programs</a></li>
+                        <li><a href="#">Departments</a></li>
+                        <li><a href="#">Research Centers</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li><a href="#">Academic Calendar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Student Life</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Clubs & Societies</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href

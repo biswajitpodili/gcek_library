@@ -1,0 +1,49 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --primary: #1a5276; /* Changed to a more professional dark blue */
+  --primary-dark: #0e3958;
+  --secondary: #2c3e50;
+  --accent: #f39c12; /* Changed to gold accent */
+  --light: #f7fafc;
+  --dark: #2d3748;
+  --success: #27ae60;
+
+  --primary-font: "Poppins", sans-serif;
+  --secondary-font: "Montserrat", sans-serif;
+  --font-title: "font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-light: var(--light);
+  --color-dark: var(--dark);
+  --color-success: var(--success);
+
+  --font-primary: var(--primary-font);
+  --font-secondary: var(--secondary-font);
+  --font-title: var(--font-title);
+}
