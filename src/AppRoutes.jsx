@@ -1,13 +1,14 @@
 import { Route, Routes } from "react-router";
 import HomeLayout from "./layouts/HomeLayout";
 import Home from "./pages/Home";
+import Services from "./pages/Services";
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} />
-        <Route path="services" element={<div>Services</div>} />
+        <Route path="services" element={<Services />} />
         <Route path="opac" element={<div>OPAC</div>} />
         <Route path="research" element={<div>Research</div>} />
         <Route path="digital-library" element={<div>Digital Library</div>} />

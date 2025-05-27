@@ -2,6 +2,7 @@ import PrincipalSection from "../components/PrincipalSection";
 import ServicesSection from "../components/ServicesSection";
 import HeroSection from "../components/HeroSection";
 import GallerySection from "../components/GallerySection";
+import FAQs from "../components/FAQs";
 
 const Home = () => {
   return (
@@ -17,6 +18,9 @@ const Home = () => {
 
       {/* Gallery Section */}
       <GallerySection />
+
+      {/* FAQs Section */}
+      <FAQs />
     </div>
   );
 };
